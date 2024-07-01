@@ -1,53 +1,56 @@
----
+## Knights Travail
 
-# Template Repository
+### Introduction
 
-This project template provides a streamlined setup for web development, integrating webpack for bundling, prettier for code formatting, eslint for code quality, babel for JavaScript transpiling, and sass for CSS preprocessing. Use this template to kickstart your web projects with a standardized and efficient development environment.
+Welcome to my Knights Travails project! This project showcases the application of Breadth-First Search (BFS) algorithm to solve a classic chess problem. On a standard 8x8 chessboard, a knight can move from any square to any other square given enough turns. The knight's move consists of moving two steps forward and one step to the side or one step forward and two steps to the side, facing any direction.
 
-## Features
+### Problem Description
 
-- Webpack configuration for bundling assets.
-- Prettier setup for code formatting.
-- ESLint configuration for code linting.
-- Babel for transpiling JavaScript.
-- Sass for CSS preprocessing.
+I built a function, `knightMoves`, that demonstrates the shortest possible way to get from one square to another, outputting all squares the knight will stop on along the way.
 
-## Getting Started
+The chessboard is represented with 2-dimensional coordinates, and the function is designed to work as follows:
 
-### Prerequisites
+```
+knightMoves([0,0], [1,2]) == [[0,0], [1,2]]
+```
 
-- Prettier Extension
-- ESLint Extension
+In some cases, there may be multiple shortest paths. For example:
 
-### Installation
+```
+knightMoves([0,0], [3,3]) == [[0,0], [2,1], [3,3]]
+# or
+knightMoves([0,0], [3,3]) == [[0,0], [1,2], [3,3]]
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/Mohamedsayhii/template-repository.git
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
+knightMoves([3,3], [0,0]) == [[3,3], [2,1], [0,0]]
+# or
+knightMoves([3,3], [0,0]) == [[3,3], [1,2], [0,0]]
 
-### Usage
+knightMoves([0,0], [7,7]) == [[0,0], [2,1], [4,2], [6,3], [4,4], [6,5], [7,7]]
+# or
+knightMoves([0,0], [7,7]) == [[0,0], [2,1], [4,2], [6,3], [7,5], [5,6], [7,7]]
+```
 
-1. Development:
-   ```sh
-   npm run start
-   ```
-   This command starts the development server.
+### Project Assignment
 
-2. Production build:
-   ```sh
-   npm run build
-   ```
-   This command creates a production build.
+1. **Graph Implementation**: I implemented a graph to represent the 8x8 chessboard and the knight's possible moves.
+2. **Shortest Path Function**: I created the `knightMoves` function to find the shortest path between two squares.
+3. **Path Output**: The function outputs the full path from the starting square to the ending square.
+4. **Move Validation**: All moves are validated to stay within the bounds of the board.
+5. **Algorithm Selection**: I chose and implemented the BFS algorithm for this problem.
 
-## License
+### Example Usage
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Here's an example of how the function works:
 
----
+```
+> knightMoves([3,3], [4,3])
+=> You made it in 3 moves! Here's your path:
+   [3,3]
+   [4,5]
+   [2,4]
+   [4,3]
+```
 
-Feel free to customize and expand upon these configurations!
+### Conclusion
+
+This project demonstrates my understanding and application of graph traversal algorithms in a practical scenario. I hope you find it as interesting as I did while building it. Happy coding!
