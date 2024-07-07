@@ -17,6 +17,7 @@
         "no-shadow": "off",
         "import/extensions": "off",
         "no-undef": "off",
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": "off",
+        "no-plusplus": "off"
     }
 }
