@@ -24,16 +24,16 @@ const chessBoard = () => {
     const board = document.createElement('div');
     board.id = 'board';
 
-    for (let i = 1; i < 9; i++) {
+    for (let i = 8; i > 0; i--) {
         const row = document.createElement('div');
         for (let j = 1; j < 9; j++) {
             row.classList.add('row');
             const cell = document.createElement('div');
             if ((i + j) % 2 === 0) {
-                cell.classList.add('cell', 'white-cell');
+                cell.classList.add('cell', 'black-cell');
                 cell.id = `[${i},${j}]`;
             } else {
-                cell.classList.add('cell', 'black-cell');
+                cell.classList.add('cell', 'white-cell');
                 cell.id = `[${i},${j}]`;
             }
             row.appendChild(cell);

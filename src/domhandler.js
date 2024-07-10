@@ -6,7 +6,6 @@ knightIcon.src = icon;
 const placeKnight = () => {
     const board = document.querySelector('#board');
     board.addEventListener('click', (e) => {
-        console.log(e.target.className.includes('cell'));
         if (
             e.target.className.includes('cell') &&
             placeKnightBtn.classList.contains('clicked')
