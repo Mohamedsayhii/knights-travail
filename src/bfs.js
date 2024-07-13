@@ -48,8 +48,7 @@ const bfs = (startingNode, desiredNode) => {
             desiredNode[0] === currentNode[0] &&
             desiredNode[1] === currentNode[1]
         ) {
-            console.log(path);
-            return;
+            return path;
         }
 
         const currentNodeNeighbors = possibleMoves(currentNode);
@@ -59,6 +58,7 @@ const bfs = (startingNode, desiredNode) => {
             queue.unshift(newPath);
         });
     }
+    return 'nada';
 };
 
 export default bfs;

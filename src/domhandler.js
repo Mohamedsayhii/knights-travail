@@ -1,4 +1,6 @@
+/* eslint-disable no-restricted-syntax */
 import icon from './assets/images/knight-chess-icon.png';
+import bfs from './bfs';
 
 const knightIcon = document.createElement('img');
 knightIcon.src = icon;
@@ -11,6 +13,7 @@ const placeKnight = () => {
             placeKnightBtn.classList.contains('clicked')
         ) {
             e.target.appendChild(knightIcon);
+            knightIcon.id = e.target.id;
             placeKnightBtn.classList.remove('clicked');
         }
     });
@@ -22,7 +25,52 @@ const randomKnightPlacement = () => {
     const randomCell = document.getElementById(`[${i},${j}]`);
     if (randomCell.className.includes('cell')) {
         randomCell.appendChild(knightIcon);
+        knightIcon.id = randomCell.id;
     }
+};
+
+const knightTravail = () => {
+    const board = document.querySelector('#board');
+
+    const resetBoard = () => {
+        for (let i = 0; i < board.childElementCount; i++) {
+            for (let j = 0; j < board.childNodes[i].childElementCount; j++) {
+                const cell = board.childNodes[i].childNodes[j];
+                if (cell.firstChild && cell.firstChild.nodeName === 'IMG')
+                    continue;
+                cell.textContent = '';
+            }
+        }
+    };
+
+    board.addEventListener('click', (e) => {
+        const startingNode = [
+            Number(document.querySelector('img').id[1]),
+            Number(document.querySelector('img').id[3]),
+        ];
+
+        resetBoard();
+
+        if (e.target.className.includes('cell') && startingNode) {
+            const path = bfs(startingNode, [
+                Number(e.target.id[1]),
+                Number(e.target.id[3]),
+            ]);
+
+            for (let i = 0; i < path.length; i++) {
+                const id = path[i].toString();
+                const cell = document.getElementById(`[${id}]`);
+                const h2 = document.createElement('h2');
+                h2.textContent = i;
+                cell.appendChild(h2);
+                if (i === path.length - 1) {
+                    cell.removeChild(h2);
+                    cell.appendChild(knightIcon);
+                    knightIcon.id = cell.id;
+                }
+            }
+        }
+    });
 };
 
 const boardHandler = () => {
@@ -30,6 +78,7 @@ const boardHandler = () => {
     const randomKnightPlacementBtn = document.querySelector(
         '#randomKnightPlacementBtn',
     );
+    const knightTravailBtn = document.querySelector('#knightTravailBtn');
 
     placeKnightBtn.addEventListener('click', () => {
         placeKnightBtn.classList.add('clicked');
@@ -39,6 +88,10 @@ const boardHandler = () => {
     randomKnightPlacementBtn.addEventListener('click', () =>
         randomKnightPlacement(),
     );
+
+    knightTravailBtn.addEventListener('click', () => {
+        knightTravail();
+    });
 };
 
 export default boardHandler;
